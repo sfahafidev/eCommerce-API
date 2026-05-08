@@ -1,6 +1,7 @@
 package com.factorit.ecommerce.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "purchases")
 public class Purchase {
 
     @Id
@@ -15,6 +17,7 @@ public class Purchase {
     private Long id;
 
     private String dni;
+    @CreationTimestamp
     private LocalDateTime date;
     private BigDecimal totalAmount;
 

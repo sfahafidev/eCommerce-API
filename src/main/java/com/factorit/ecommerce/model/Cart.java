@@ -1,5 +1,6 @@
 package com.factorit.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cart")
 public class Cart {
 
     @Id
@@ -25,12 +27,13 @@ public class Cart {
     private CartStatus status;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> items = new ArrayList<>();
+    @JsonManagedReference
+    private List<CartItem> items = new ArrayList<>();
 
     public Cart() {
     }
 
-    public Cart(Long id, String dni, Boolean isSpecial, BigDecimal price, LocalDateTime dateCreated, LocalDateTime dateUpdated, CartStatus status, List<Item> items) {
+    public Cart(Long id, String dni, Boolean isSpecial, BigDecimal price, LocalDateTime dateCreated, LocalDateTime dateUpdated, CartStatus status, List<CartItem> items) {
         this.id = id;
         this.dni = dni;
         this.isSpecial = isSpecial;
@@ -97,11 +100,11 @@ public class Cart {
         this.status = status;
     }
 
-    public List<Item> getItems() {
+    public List<CartItem> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<CartItem> items) {
         this.items = items;
     }
 }

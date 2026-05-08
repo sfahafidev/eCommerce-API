@@ -1,32 +1,20 @@
 package com.factorit.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
 @Entity
-public class Item {
+@Table(name = "product")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private BigDecimal price;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-    public Item() {
-    }
-
-    public Item(Long id, String name, BigDecimal price, Cart cart) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.cart = cart;
-    }
 
     public Long getId() {
         return id;
@@ -50,13 +38,5 @@ public class Item {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 }

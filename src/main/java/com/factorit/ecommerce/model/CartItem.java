@@ -1,36 +1,34 @@
 package com.factorit.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity
-@Table(name = "purchase_items")
-public class PurchaseItem {
+@Table(name = "cart_items")
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal price;
     private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchase_id")
-    private Purchase purchase;
+    @JoinColumn(name = "cart_id")
+    @JsonBackReference
+    private Cart cart;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public PurchaseItem() {
+    public CartItem() {
     }
 
-    public PurchaseItem(Long id, BigDecimal price, int quantity, Purchase purchase, Product product) {
+    public CartItem(Long id, int quantity, Cart cart, Product product) {
         this.id = id;
-        this.price = price;
         this.quantity = quantity;
-        this.purchase = purchase;
+        this.cart = cart;
         this.product = product;
     }
 
@@ -42,14 +40,6 @@ public class PurchaseItem {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -58,12 +48,12 @@ public class PurchaseItem {
         this.quantity = quantity;
     }
 
-    public Purchase getPurchase() {
-        return purchase;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setPurchase(Purchase purchase) {
-        this.purchase = purchase;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public Product getProduct() {
@@ -73,4 +63,5 @@ public class PurchaseItem {
     public void setProduct(Product product) {
         this.product = product;
     }
+
 }

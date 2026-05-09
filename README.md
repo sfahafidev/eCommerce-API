@@ -20,8 +20,12 @@ Aplicación Spring Boot que expone una API REST que permite la gestión de carri
 ## 📡 Arquitectura funcional
 
 
-- **Entrada REST:** Número de documento (DNI) - REVISAR
-- **Salida REST:** Lista de carritos abiertos o cerrados
+- **Entrada REST:** Número de documento (DNI), identificador de producto, cantidad y si es carrito especial o no. 
+- **Salida REST:** Creación de nuevo carrito para el cliente
+
+
+- **Entrada REST:** Identificador de carrito.
+- **Salida REST:** Finalización de carrito abierto con cálculo de descuentos que apliquen. 
 
 ---
 
@@ -33,6 +37,11 @@ Aplicación Spring Boot que expone una API REST que permite la gestión de carri
 ### `PUT /carts/add-item`  Agrega un item a un carrito abierto
 ### `PUT /carts/remove-item`  Elimina un item de un carrito abierto
 ### `DELETE /carts/{id}`  Elimina un carrito abierto
+
+- **Purchase y PurchaseItems**
+### `GET /purchase`  Obtiene la lista de compras general 
+### `POST /purchases/checkout/idCart`  Finalizar carrito con descuentos que apliquen
+### `GET /purchases/dni/number/range?from=date&to=date`  Filtrar lista de compra por fechas
 
 Obtiene los carritos de compra en estado abierto.
 
@@ -50,7 +59,6 @@ Accept: application/xml
         {
             "id": 1,
             "dni": "12345678",
-            "price": 0,
             "dateCreated": "2026-05-07T21:14:00.29438",
             "dateUpdated": null,
             "status": "OPEN",

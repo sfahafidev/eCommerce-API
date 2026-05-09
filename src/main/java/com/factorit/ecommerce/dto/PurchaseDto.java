@@ -1,39 +1,16 @@
-package com.factorit.ecommerce.model;
-
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+package com.factorit.ecommerce.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "purchases")
-public class Purchase {
+public class PurchaseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String dni;
-    @CreationTimestamp
     private LocalDate date;
     private BigDecimal totalAmount;
-
-    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
-    private List<PurchaseItem> items = new ArrayList<>();
-
-    public Purchase() {
-    }
-
-    public Purchase(Long id, String dni, LocalDate date, BigDecimal totalAmount, List<PurchaseItem> items) {
-        this.id = id;
-        this.dni = dni;
-        this.date = date;
-        this.totalAmount = totalAmount;
-        this.items = items;
-    }
+    private List<PurchaseItemDto> items;
 
     public Long getId() {
         return id;
@@ -67,11 +44,11 @@ public class Purchase {
         this.totalAmount = totalAmount;
     }
 
-    public List<PurchaseItem> getItems() {
+    public List<PurchaseItemDto> getItems() {
         return items;
     }
 
-    public void setItems(List<PurchaseItem> items) {
+    public void setItems(List<PurchaseItemDto> items) {
         this.items = items;
     }
 

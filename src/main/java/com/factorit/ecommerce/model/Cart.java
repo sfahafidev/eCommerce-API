@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +17,10 @@ public class Cart {
     private Long id;
 
     private String dni;
-    private Boolean isSpecial;
-    private BigDecimal price;
+    private boolean isSpecial;
     @CreationTimestamp
-    private LocalDateTime dateCreated;
-    private LocalDateTime dateUpdated;
+    private LocalDate dateCreated;
+    private LocalDate dateUpdated;
     @Enumerated(value = EnumType.STRING)
     private CartStatus status;
 
@@ -33,11 +31,10 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Long id, String dni, Boolean isSpecial, BigDecimal price, LocalDateTime dateCreated, LocalDateTime dateUpdated, CartStatus status, List<CartItem> items) {
+    public Cart(Long id, String dni, boolean isSpecial, LocalDate dateCreated, LocalDate dateUpdated, CartStatus status, List<CartItem> items) {
         this.id = id;
         this.dni = dni;
         this.isSpecial = isSpecial;
-        this.price = price;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
         this.status = status;
@@ -60,35 +57,27 @@ public class Cart {
         this.dni = dni;
     }
 
-    public Boolean getSpecial() {
+    public boolean isSpecial() {
         return isSpecial;
     }
 
-    public void setSpecial(Boolean special) {
+    public void setSpecial(boolean special) {
         isSpecial = special;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public LocalDateTime getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public LocalDateTime getDateUpdated() {
+    public LocalDate getDateUpdated() {
         return dateUpdated;
     }
 
-    public void setDateUpdated(LocalDateTime dateUpdated) {
+    public void setDateUpdated(LocalDate dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
 
